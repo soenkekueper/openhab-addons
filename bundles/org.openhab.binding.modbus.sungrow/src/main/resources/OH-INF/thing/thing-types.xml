@@ -39,6 +39,8 @@
 			<channel id="sg-daily-pv-generation" typeId="sg-daily-pv-generation"/>
 			<channel id="sg-total-pv-generation" typeId="sg-total-pv-generation"/>
 			<channel id="sg-power-factor" typeId="sg-power-factor"/>
+
+
 			<!-- Not working
 				<channel id="sg-co2-reduction" typeId="sg-co2-reduction"/>
 			-->
@@ -83,7 +85,7 @@
 			<channel id="sg-total-export-energy" typeId="sg-total-export-energy"/>
 			<channel id="sg-daily-import-energy" typeId="sg-daily-import-energy"/>
 			<channel id="sg-total-import-energy" typeId="sg-total-import-energy"/>
-			<channel id="sg-daily-export-power-from-pv" typeId="sg-daily-export-power-from-pv"/>
+			<channel id="sg-daily-export-energy-from-pv" typeId="sg-daily-export-energy-from-pv"/>
 			<channel id="sg-total-export-energy-from-pv" typeId="sg-total-export-energy-from-pv"/>
 			<channel id="sg-export-power" typeId="sg-export-power"/>
 			<!-- not working
@@ -99,6 +101,20 @@
 			<channel id="sg-daily-direct-energy-consumption" typeId="sg-daily-direct-energy-consumption"/>
 			<channel id="sg-total-direct-energy-consumption" typeId="sg-total-direct-energy-consumption"/>
 			<channel id="sg-self-consumption-today" typeId="sg-self-consumption-today"/>
+			<channel id="sg-backup-phase-a-current" typeId="sg-backup-phase-a-current"/>
+			<channel id="sg-backup-phase-b-current" typeId="sg-backup-phase-b-current"/>
+			<channel id="sg-backup-phase-c-current" typeId="sg-backup-phase-c-current"/>
+			<channel id="sg-backup-phase-a-power" typeId="sg-backup-phase-a-power"/>
+			<channel id="sg-backup-phase-b-power" typeId="sg-backup-phase-b-power"/>
+			<channel id="sg-backup-phase-c-power" typeId="sg-backup-phase-c-power"/>
+			<channel id="sg-backup-total-power" typeId="sg-backup-total-power"/>
+
+			<!--
+				<channel id="sg-meter-active-power" typeId="sg-meter-active-power"/>
+				<channel id="sg-meter-phase-a-active-power" typeId="sg-meter-phase-a-active-power"/>
+				<channel id="sg-meter-phase-b-active-power" typeId="sg-meter-phase-b-active-power"/>
+				<channel id="sg-meter-phase-c-active-power" typeId="sg-meter-phase-c-active-power"/>
+			-->
 		</channels>
 	</channel-group-type>
 
@@ -238,13 +254,13 @@
 		</tags>
 		<state pattern="%.2f %unit%" readOnly="true"/>
 	</channel-type>
-	<channel-type id="sg-daily-export-power-from-pv">
-		<item-type>Number:Power</item-type>
-		<label>Daily Export Power from PV</label>
+	<channel-type id="sg-daily-export-energy-from-pv">
+		<item-type>Number:Energy</item-type>
+		<label>Daily Export Energy from PV</label>
 		<category>Energy</category>
 		<tags>
 			<tag>Measurement</tag>
-			<tag>Power</tag>
+			<tag>Energy</tag>
 		</tags>
 		<state pattern="%.2f %unit%" readOnly="true"/>
 	</channel-type>
@@ -413,6 +429,122 @@
 		<state pattern="%.2f %unit%" readOnly="true"/>
 		</channel-type>
 	-->
+
+	<!--
+		<channel-type id="sg-meter-active-power" advanced="false">
+		<item-type>Number:Power</item-type>
+		<label>Meter Active Power</label>
+		<category>Energy</category>
+		<tags>
+		<tag>Measurement</tag>
+		<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+		</channel-type>
+		<channel-type id="sg-meter-phase-a-active-power" advanced="true">
+		<item-type>Number:Power</item-type>
+		<label>Meter Phase A Active Power</label>
+		<category>Energy</category>
+		<tags>
+		<tag>Measurement</tag>
+		<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+		</channel-type>
+		<channel-type id="sg-meter-phase-b-active-power" advanced="true">
+		<item-type>Number:Power</item-type>
+		<label>Meter Phase B Active Power</label>
+		<category>Energy</category>
+		<tags>
+		<tag>Measurement</tag>
+		<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+		</channel-type>
+		<channel-type id="sg-meter-phase-c-active-power" advanced="true">
+		<item-type>Number:Power</item-type>
+		<label>Meter Phase C Active Power</label>
+		<category>Energy</category>
+		<tags>
+		<tag>Measurement</tag>
+		<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+		</channel-type>
+	-->
+
+	<channel-type id="sg-backup-phase-a-current" advanced="true">
+		<item-type>Number:ElectricCurrent</item-type>
+		<label>Backup Phase A Current</label>
+		<category>Energy</category>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Current</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="sg-backup-phase-b-current" advanced="true">
+		<item-type>Number:ElectricCurrent</item-type>
+		<label>Backup Phase B Current</label>
+		<category>Energy</category>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Current</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="sg-backup-phase-c-current" advanced="true">
+		<item-type>Number:ElectricCurrent</item-type>
+		<label>Backup Phase C Current</label>
+		<category>Energy</category>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Current</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="sg-backup-phase-a-power">
+		<item-type>Number:Power</item-type>
+		<label>Backup Phase A Power</label>
+		<category>Energy</category>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="sg-backup-phase-b-power">
+		<item-type>Number:Power</item-type>
+		<label>Backup Phase B Power</label>
+		<category>Energy</category>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="sg-backup-phase-c-power">
+		<item-type>Number:Power</item-type>
+		<label>Backup Phase C Power</label>
+		<category>Energy</category>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="sg-backup-total-power">
+		<item-type>Number:Power</item-type>
+		<label>Backup Total Power</label>
+		<category>Energy</category>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Power</tag>
+		</tags>
+		<state pattern="%.2f %unit%" readOnly="true"/>
+	</channel-type>
+
+
 	<channel-type id="sg-phase-a-current" advanced="true">
 		<item-type>Number:ElectricCurrent</item-type>
 		<label>Phase A Current</label>

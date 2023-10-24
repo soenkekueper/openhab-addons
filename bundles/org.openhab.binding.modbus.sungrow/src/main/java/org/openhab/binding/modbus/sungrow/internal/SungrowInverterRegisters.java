@@ -70,6 +70,23 @@ public enum SungrowInverterRegisters {
      * DAILY_PV_ENERGY_YIELDS(1, 6196, UINT16, quantityTypeFactory(Units.KILOWATT_HOUR)),
      * MONTHLY_PV_ENERGY_YIELDS(1, 9227, UINT16, quantityTypeFactory(Units.KILOWATT_HOUR)),
      */
+    /*
+     * METER_ACTIVE_POWER(5601, INT32_SWAP, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
+     * METER_PHASE_A_ACTIVE_POWER(5603, INT32_SWAP, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
+     * METER_PHASE_B_ACTIVE_POWER(5605, INT32_SWAP, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
+     * METER_PHASE_C_ACTIVE_POWER(5607, INT32_SWAP, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
+     */
+    BACKUP_PHASE_A_CURRENT(5720, INT16, ConversionConstants.DIV_BY_TEN, quantityFactory(Units.AMPERE),
+            "load-information"),
+    BACKUP_PHASE_B_CURRENT(5721, INT16, ConversionConstants.DIV_BY_TEN, quantityFactory(Units.AMPERE),
+            "load-information"),
+    BACKUP_PHASE_C_CURRENT(5722, INT16, ConversionConstants.DIV_BY_TEN, quantityFactory(Units.AMPERE),
+            "load-information"),
+
+    BACKUP_PHASE_A_POWER(5723, INT16, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
+    BACKUP_PHASE_B_POWER(5724, INT16, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
+    BACKUP_PHASE_C_POWER(5725, INT16, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
+    BACKUP_TOTAL_POWER(5726, INT16, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
 
     /**
      * Registers return invalid values.
@@ -81,7 +98,8 @@ public enum SungrowInverterRegisters {
             "overview"),
     TOTAL_PV_GENERATION(13003, UINT32_SWAP, ConversionConstants.DIV_BY_TEN, quantityFactory(Units.KILOWATT_HOUR),
             "overview"),
-    DAILY_EXPORT_POWER_FROM_PV(13005, UINT16, BigDecimal.valueOf(100), quantityFactory(Units.WATT), "grid-information"),
+    DAILY_EXPORT_ENERGY_FROM_PV(13005, UINT16, ConversionConstants.DIV_BY_TEN, quantityFactory(Units.KILOWATT_HOUR),
+            "grid-information"),
     TOTAL_EXPORT_ENERGY_FROM_PV(13006, UINT32_SWAP, ConversionConstants.DIV_BY_TEN,
             quantityFactory(Units.KILOWATT_HOUR), "grid-information"),
     LOAD_POWER(13008, INT32_SWAP, BigDecimal.ONE, quantityFactory(Units.WATT), "load-information"),
